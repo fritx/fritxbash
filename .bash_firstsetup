@@ -1,0 +1,59 @@
+# 系统设置 轻点点按 control/capslock互换 *三指拖移 dock删除无用 dock缩小+动画
+
+export $HOSTNAME='xxxxx.xx'
+export $GIT_USERNAME='xxxxx.xx'
+export $GIT_EMAIL='xxxxx.xx@aaaaaaa-inc.com'
+
+# 设置hostname - https://knowledge.autodesk.com/search-result/caas/sfdcarticles/sfdcarticles/Setting-the-Mac-hostname-or-computer-name-from-the-terminal.html
+scutil --set HostName $HOSTNAME
+
+# zsh - https://ohmyz.sh/ - 复制命令运行
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# ~/.bashrc - 新建~/.bashrc ~/.bash_profile 并在后者和.zshrc引用前者
+# 如 touch ~/.bashrc
+# 如 echo '. ~/.bashrc' >> ~/.bash_profile
+# 如 echo '. ~/.bashrc' >> ~/.zshrc
+
+# homebrew - https://brew.sh - 复制命令运行
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install m-cli
+# m-cli
+# 如版本不够新 则 curl -fsSL https://raw.githubusercontent.com/rgcr/m-cli/master/install.sh | sudo sh
+m finder showhiddenfiles  # 显示隐藏文件
+m finder showpath YES  # 显示完整路径
+
+brew upgrade git
+# 设置git用户
+git config --global user.name $GIT_USERNAME
+git config --global user.email $GIT_EMAIL
+# 以 gitlab - account - private token 当密码做 git clone
+
+# nvm
+brew install nvm
+# 复制启动命令到 ~/.bashrc -- echo ... > ~/.bashrc
+# 设置nvm镜像 - https://www.jianshu.com/p/bc56e70303f7
+export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+
+brew cask install sogouinput alfred iterm2 spectacle google-chrome visual-studio-code sourcetree
+brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevtools
+# alfred spectacle 勾选开机启动
+# sogou设置 简约黑 每页展示数5=>9
+# chrome插件 viumium octotree react-devtools redux-devtools
+# vscode插件 gitlens prettier eslint
+# iterm Preferences - Profiles - General - Working Directory - Reuse previous seesion's directory
+
+# node12
+nvm install 12.9.0
+nvm alias default 12.9.0
+
+# npm 默认taobao镜像 最近npmjs官方太卡了
+npm config set registry https://registry.npm.taobao.org/
+
+npm i -g nrm whistle serve imagemin-cli fanyi jayin
+# whistle
+# whistle https证书下载安装 并设置始终信任 配置系统代理8899
+# whistle https 与ProxySwitchyOmega冲突 需关掉后者
+# nrm
+# 添加公司内部源
+# nrm add aaaaaaa https://registry.npm.aaaaaaa-inc.com
