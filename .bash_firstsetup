@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # 系统设置 轻点点按 control/capslock互换 *三指拖移 dock删除无用 dock缩小+动画
 
 export $HOSTNAME='xxxxx.xx'
