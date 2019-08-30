@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    ".gitignore*": "gitignore",
     ".bash*": "shellscript"
   }
 }
