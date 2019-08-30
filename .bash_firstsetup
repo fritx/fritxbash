@@ -40,12 +40,14 @@ brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevt
 # alfred spectacle 勾选开机启动
 # sogou设置 简约黑 每页展示数5=>9
 # chrome插件 viumium octotree react-devtools redux-devtools
+# chrome插件 SwitchyOmega 划词翻译
 # vscode插件 gitlens prettier eslint
 # iterm Preferences - Profiles - General - Working Directory - Reuse previous seesion's directory
 
 # node12
-nvm install 12.9.0
-nvm alias default 12.9.0
+export NVM_DEFAULT_NODE='12.9.1'
+nvm install $NVM_DEFAULT_NODE
+nvm alias default $NVM_DEFAULT_NODE
 
 # npm 默认taobao镜像 最近npmjs官方太卡了
 npm config set registry https://registry.npm.taobao.org/
@@ -54,6 +56,3 @@ npm i -g nrm whistle serve imagemin-cli fanyi jayin
 # whistle
 # whistle https证书下载安装 并设置始终信任 配置系统代理8899
 # whistle https 与ProxySwitchyOmega冲突 需关掉后者
-# nrm
-# 添加公司内部源
-# nrm add aaaaaaa https://registry.npm.aaaaaaa-inc.com
