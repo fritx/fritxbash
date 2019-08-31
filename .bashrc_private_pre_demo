@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Your private stuffs:
+
+# connect to vps
+export VPS_DOMAIN='xxxxx.xx'
+export VPS_IP='xxx.xx.xx.xxx'
+alias sshr="ssh root@$VPS_IP"

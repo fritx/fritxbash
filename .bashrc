@@ -1,3 +1,6 @@
+# personal private stuffs (-pre)
+. ~/.bashrc_private_pre
+
 # vscode
 # 支持code命令 打开vscode
 # https://stackoverflow.com/questions/29963617/how-to-call-vs-code-editor-from-command-line
@@ -39,3 +42,6 @@ alias ..='j ..'
 alias ..2='j ../..'
 alias ..3='j ../../..'
 alias ..4='j ../../../..'
+
+# personal private stuffs (-post)
+. ~/.bashrc_private_post

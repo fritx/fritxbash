@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# personal private stuffs (-pre)
+. ~/.bash_firstsetup_private_pre
+
 # 系统设置 轻点点按 control/capslock互换 *三指拖移 dock删除无用 dock缩小+动画
 
 export $HOSTNAME='xxxxx.xx'
@@ -58,3 +61,6 @@ npm i -g nrm whistle serve imagemin-cli fanyi jayin
 # whistle
 # whistle https证书下载安装 并设置始终信任 配置系统代理8899
 # whistle https 与ProxySwitchyOmega冲突 需关掉后者
+
+# personal private stuffs (-post)
+. ~/.bash_firstsetup_private_post
