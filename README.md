@@ -39,3 +39,12 @@ sh repo_apply.sh
 # from now on, you can hack anything here around `./` instead
 # like editing the .bashrc, .etc
 ```
+
+For zsh user, make sure that you have appended the below to .zshrc:
+
+```sh
+# ~/.zshrc
+# ...
+# load our bashrc
+. ~/.bashrc
+```
