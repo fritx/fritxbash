@@ -2,6 +2,9 @@
 
 # Your private stuffs:
 
+# fritxbash
+export FRITXBASH_PATH='~/d/fritxbash'
+
 # connect to vps
 export VPS_DOMAIN='xxxxx.xx'
 export VPS_IP='xxx.xx.xx.xxx'
