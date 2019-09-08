@@ -8,8 +8,6 @@
 
 - .vscode/settings.json
 - .bash_firstsetup
-- .bash_firstsetup_private_post
-- .bash_firstsetup_private_pre
 - .bash_profile
 - .bashrc
 - .bashrc_private_post
