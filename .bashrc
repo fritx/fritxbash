@@ -2,6 +2,8 @@
 . ~/.bashrc_private_pre
 . ~/.bashrc_include
 
+export USER_HOME="/Users/$USER"
+
 # vscode
 # 支持code命令 打开vscode
 # https://stackoverflow.com/questions/29963617/how-to-call-vs-code-editor-from-command-line
