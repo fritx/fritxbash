@@ -18,7 +18,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 # homebrew - https://brew.sh - 复制命令运行
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install m-cli
+brew install m-cli tree redis mongodb
 # m-cli
 # 如版本不够新 则 curl -fsSL https://raw.githubusercontent.com/rgcr/m-cli/master/install.sh | sudo sh
 m finder showhiddenfiles  # 显示隐藏文件
@@ -53,7 +53,7 @@ nvm alias default $NVM_DEFAULT_NODE
 # npm 默认taobao镜像 最近npmjs官方太卡了
 npm config set registry https://registry.npm.taobao.org/
 
-npm i -g nrm whistle serve imagemin-cli fanyi jayin
+npm i -g nrm whistle serve imagemin-cli fanyi jayin pm2
 # whistle
 # whistle https证书下载安装 并设置始终信任 配置系统代理8899
 # whistle https 与ProxySwitchyOmega冲突 需关掉后者

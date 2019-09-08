@@ -3,12 +3,12 @@
 # Your private stuffs:
 
 # fritxbash
-export FRITXBASH_PATH='~/d/fritxbash'
+export FRITXBASH_PATH="/Users/$USER/d/fritxbash"
 
 # hostname & git account
-export $HOSTNAME='xxxxx.xx'
-export $GIT_USERNAME='xxxxx.xx'
-export $GIT_EMAIL='xxxxx.xx@aaaaaaa-inc.com'
+export HOSTNAME='xxxxx.xx'
+export GIT_USERNAME='xxxxx.xx'
+export GIT_EMAIL='xxxxx.xx@aaaaaaa-inc.com'
 
 # connect to vps
 export VPS_DOMAIN='xxxxx.xx'

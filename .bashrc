@@ -1,5 +1,6 @@
 # personal private stuffs (-pre)
 . ~/.bashrc_private_pre
+. ~/.bashrc_include
 
 # vscode
 # 支持code命令 打开vscode
@@ -30,7 +31,8 @@ alias bss='. ~/.bashrc'
 alias ni='npm i'
 alias nt='npm test'
 alias ns='npm start'
-alias nd='npm run dev'
+alias nr='npm run'
+alias nd='nr dev'
 alias bi='brew install'
 alias bci='brew cask install'
 alias ws='w2 start'

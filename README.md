@@ -10,6 +10,7 @@
 - .bash_firstsetup
 - .bash_profile
 - .bashrc
+- .bashrc_include
 - .bashrc_private_post
 - .bashrc_private_pre
 - .editorconfig
