@@ -38,3 +38,5 @@ sh repo_apply.sh
 # from now on, you can hack anything here around `./` instead
 # like editing the .bashrc, .etc
 ```
+
+<img width=600 src=WechatIMG239.png>

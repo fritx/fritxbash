@@ -1,4 +1,6 @@
 {
+  "files.trimFinalNewlines": true,
+
   "files.associations": {
     ".gitignore*": "gitignore",
     ".bash*": "shellscript"
