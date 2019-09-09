@@ -11,3 +11,6 @@ for f in {post,pre}; do {
 }
 done
 unset f
+
+git submodule init
+git submodule update
