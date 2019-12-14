@@ -23,7 +23,7 @@
 git clone https://github.com/fritx/fritxbash.git
 cd fritxbash
 
-# setup private stuffs
+# setup private stuffs & sub-modules
 sh repo_setup.sh
 
 # do some back-up like:
