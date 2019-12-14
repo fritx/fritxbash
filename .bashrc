@@ -34,11 +34,17 @@ alias ni='npm i'
 alias nt='npm test'
 alias ns='npm start'
 alias nr='npm run'
+alias nb='nr build'
+alias niif='npm init --force && echo package-lock=false >> .npmrc'
 alias nd='nr dev'
+alias b='brew'
+alias bs='brew search'
 alias bi='brew install'
 alias bci='brew cask install'
 alias ws='w2 start'
+alias prs='pm2 resurrect'
 alias fy='fanyi'
+alias g='git'
 alias gch='g checkout'
 alias j='cd'
 alias ~='j ~'
@@ -46,6 +52,10 @@ alias ..='j ..'
 alias ..2='j ../..'
 alias ..3='j ../../..'
 alias ..4='j ../../../..'
+
+function imgmin() {
+  imagemin $1 --out-dir .
+}
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

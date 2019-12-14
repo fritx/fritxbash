@@ -1,8 +1,12 @@
 {
+  // https://github.com/editorconfig/editorconfig/issues/269#issuecomment-346985934
   "files.trimFinalNewlines": true,
 
   "files.associations": {
     ".gitignore*": "gitignore",
-    ".bash*": "shellscript"
-  }
+    "*.bash*": "shellscript"
+  },
+
+  // could be very aggresive on an external workspace
+  "editor.formatOnSave": false
 }

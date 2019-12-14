@@ -24,7 +24,6 @@ brew install m-cli tree redis mongodb
 m finder showhiddenfiles  # 显示隐藏文件
 m finder showpath YES  # 显示完整路径
 
-brew upgrade git
 # 设置git用户
 git config --global user.name $GIT_USERNAME
 git config --global user.email $GIT_EMAIL
@@ -44,16 +43,18 @@ brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevt
 # chrome插件 SwitchyOmega 划词翻译
 # vscode插件 gitlens prettier eslint
 # iterm Preferences - Profiles - General - Working Directory - Reuse previous seesion's directory
+# sourcetree 分体暂存视图
+# sourcetree git设置 合并时不使用快进 *追踪分支默认变基
 
 # node12
 export NVM_DEFAULT_NODE='12.9.1'
 nvm install $NVM_DEFAULT_NODE
-nvm alias default $NVM_DEFAULT_NODE
 
 # npm 默认taobao镜像 最近npmjs官方太卡了
 npm config set registry https://registry.npm.taobao.org/
 
-npm i -g nrm whistle serve imagemin-cli fanyi jayin pm2
+npm i -g nrm whistle imagemin-cli fanyi jayin pm2 hotel
+npm i -g typescript create-react-app
 # whistle
 # whistle https证书下载安装 并设置始终信任 配置系统代理8899
 # whistle https 与ProxySwitchyOmega冲突 需关掉后者
@@ -61,3 +62,14 @@ npm i -g nrm whistle serve imagemin-cli fanyi jayin pm2
 # npm mirrows
 # 添加公司内部源 或私有源
 # nrm add company https://your.company.com/
+
+# pm2 processes
+pm2 startup  # 执行给出的一段命令 注册自启动
+pm2 start --name=whistle w2 -- run
+# (cd xxx/aaa && pm2 start --name=aaa npm -- start)
+# (cd xxx/bbb && pm2 start --name=bbb npm -- start)
+pm2 save
+
+# hotel processes
+# cd xxx/aaa && hotel add 'npm start' -n aaa -p 8081
+# cd xxx/bbb && hotel add 'npm run dev' -n bbb -p 8082
