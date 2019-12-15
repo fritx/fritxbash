@@ -46,6 +46,9 @@ alias prs='pm2 resurrect'
 alias fy='fanyi'
 alias g='git'
 alias gch='g checkout'
+alias wh='which'
+alias whapp='whichapp'
+alias js='jayin'
 alias j='cd'
 alias ~='j ~'
 alias ..='j ..'
@@ -53,8 +56,40 @@ alias ..2='j ../..'
 alias ..3='j ../../..'
 alias ..4='j ../../../..'
 
+# pm2 & db
+alias prs="pm2 resurrect"
+alias mgd="mongod --config /usr/local/etc/mongod.conf"
+alias rds="redis-server /usr/local/etc/redis.conf"
+
+# docker
+alias dps='docker ps'
+alias dim='docker images'
+
+# npm rush register
+function npm_reg() {
+  # ~/d is the directory where i develop
+  cd ~/d
+  mkd "$1"
+  npm init -y
+  # version `0.0.0` instead of `1.0.0`
+  cat package.json | \
+    js -to 'x.version = `0.0.0`, JSON.stringify(x, null, 2)+`\n`'  \
+    > package.json
+  npm publish
+}
+
+# short for imagemin
 function imgmin() {
   imagemin $1 --out-dir .
+}
+
+# prepend text to file
+# https://unix.stackexchange.com/questions/56975/whats-the-command-to-prepend-a-line-to-a-file
+function prepend() {
+  local text=$2
+  local file=$1
+  local tmpfile="$file.prepend.tmp"
+  (echo $text; cat $file) > $tmpfile; mv $tmpfile $file
 }
 
 # personal private stuffs (-post)

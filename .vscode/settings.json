@@ -4,8 +4,21 @@
 
   "files.associations": {
     ".gitignore*": "gitignore",
-    "*.bash*": "shellscript"
+    ".bash*": "shellscript",
+    ".npmrc": "dotenv",
+    ".env*": "dotenv",
+    // wechat mini programs
+    "*.wxss": "css",
+    "*.wxml": "html"
   },
+
+  "emmet.includeLanguages": {
+    // vue, react
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
 
   // could be very aggresive on an external workspace
   "editor.formatOnSave": false
