@@ -18,7 +18,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 # homebrew - https://brew.sh - 复制命令运行
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install m-cli tree redis mongodb
+brew install m-cli tree redis mongodb thefuck autojump
 # m-cli
 # 如版本不够新 则 curl -fsSL https://raw.githubusercontent.com/rgcr/m-cli/master/install.sh | sudo sh
 m finder showhiddenfiles  # 显示隐藏文件
@@ -46,8 +46,8 @@ brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevt
 # sourcetree 分体暂存视图
 # sourcetree git设置 合并时不使用快进 *追踪分支默认变基
 
-# node12
-export NVM_DEFAULT_NODE='12.9.1'
+# node16 LTS
+export NVM_DEFAULT_NODE='16.13.0'
 nvm install $NVM_DEFAULT_NODE
 
 # npm 默认taobao镜像 最近npmjs官方太卡了

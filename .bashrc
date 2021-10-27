@@ -23,7 +23,16 @@ export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
 # https://juejin.im/post/5cbd790cf265da037a3cea95
 alias openst='(/Applications/SourceTree.app/Contents/MacOS/SourceTree &)'
 
+# thefuck
+eval $(thefuck --alias)
+
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 # alias
+alias v='vim'
+alias co='code'
+alias co.='code .'
 alias e='code'
 alias e.='e .'
 alias o='open'
@@ -33,10 +42,17 @@ alias bss='. ~/.bashrc'
 alias ni='npm i'
 alias nt='npm test'
 alias ns='npm start'
+alias nw='nr watch'
 alias nr='npm run'
 alias nb='nr build'
 alias niif='npm init --force && echo package-lock=false >> .npmrc'
 alias nd='nr dev'
+alias y='yarn'
+alias ya='yarn add'
+alias yt='yarn test'
+alias ys='yarn start'
+alias yw='yarn watch'
+alias yd='yarn dev'
 alias b='brew'
 alias bs='brew search'
 alias bi='brew install'
@@ -49,12 +65,13 @@ alias gch='g checkout'
 alias wh='which'
 alias whapp='whichapp'
 alias js='jayin'
-alias j='cd'
-alias ~='j ~'
-alias ..='j ..'
-alias ..2='j ../..'
-alias ..3='j ../../..'
-alias ..4='j ../../../..'
+alias f='fuck'
+alias j='autojump'
+alias ~='cd ~'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
 # pm2 & db
 alias prs="pm2 resurrect"
