@@ -2,7 +2,7 @@
 . ~/.bashrc_private_pre
 . ~/.bashrc_include
 
-export USER_HOME="/Users/$USER"
+# export USER_HOME="/Users/$USER"
 
 # vscode
 # 支持code命令 打开vscode
@@ -19,6 +19,10 @@ export NVM_DIR="$HOME/.nvm"
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
 
+# nodejs memory limit
+# https://www.npmjs.com/package/increase-memory-limit
+export NODE_OPTIONS=--max_old_space_size=4096
+
 # sourcetree中 git提交pre-commit 报错node找不到
 # https://juejin.im/post/5cbd790cf265da037a3cea95
 alias openst='(/Applications/SourceTree.app/Contents/MacOS/SourceTree &)'
@@ -28,6 +32,12 @@ eval $(thefuck --alias)
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # alias
 alias v='vim'
@@ -39,7 +49,10 @@ alias o='open'
 alias o.='open .'
 alias bse="e $FRITXBASH_PATH"
 alias bss='. ~/.bashrc'
-alias ni='npm i'
+# export NPM='npm'  # use npm
+# export NPM='pnpm'  # use pnpm
+# alias ni="$NPM i"  # prefer @antfu/ni
+# alias nui="$NPM uninstall"  # prefer @antfu/nu
 alias nt='npm test'
 alias ns='npm start'
 alias nw='nr watch'
@@ -52,6 +65,7 @@ alias ya='yarn add'
 alias yt='yarn test'
 alias ys='yarn start'
 alias yw='yarn watch'
+alias yb='yarn build'
 alias yd='yarn dev'
 alias b='brew'
 alias bs='brew search'
@@ -66,7 +80,7 @@ alias wh='which'
 alias whapp='whichapp'
 alias js='jayin'
 alias f='fuck'
-alias j='autojump'
+# alias j='autojump'
 alias ~='cd ~'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -81,6 +95,12 @@ alias rds="redis-server /usr/local/etc/redis.conf"
 # docker
 alias dps='docker ps'
 alias dim='docker images'
+alias drm='docker rm'
+alias dr='docker run'
+
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # npm rush register
 function npm_reg() {
@@ -108,6 +128,27 @@ function prepend() {
   local tmpfile="$file.prepend.tmp"
   (echo $text; cat $file) > $tmpfile; mv $tmpfile $file
 }
+
+export PATH=$PATH:$HOME/bin
+alias k=kanban
+
+# flutter
+# https://flutter.cn/docs/get-started/install/macos
+export PATH="$PATH:$HOME/flutter/bin"
+
+# android studio
+# https://developer.android.com/studio/command-line/variables
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+# sdkmanager
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+
+# java jdk
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/jre
+
+# Python3 edge-tts
+export PATH=$PATH:$HOME/Library/Python/3.8/bin
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post
