@@ -1,0 +1,42 @@
+{
+  // https://github.com/editorconfig/editorconfig/issues/269#issuecomment-346985934
+  "files.trimFinalNewlines": true,
+  // https://stackoverflow.com/questions/40891692/how-to-disable-or-hide-scrollbar-minimap
+  "editor.minimap.enabled": false,
+
+  "files.associations": {
+    "**/.vscode/settings_*.json": "jsonc",
+    ".gitignore*": "gitignore",
+    ".*rc": "json",
+    ".bash*": "shellscript",
+    ".zsh*": "shellscript",
+    ".npmrc": "dotenv",
+    ".env*": "dotenv",
+    "*.rules": "yaml",
+    // wechat mini programs
+    "*.wss": "javascript",
+    "*.wxss": "css",
+    "*.wxml": "html",
+  },
+
+  "emmet.includeLanguages": {
+    // vue, react
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+
+  // Disable Autocomplete on . (dot) in VSCode
+  // https://stackoverflow.com/questions/49447663/disable-autocomplete-on-dot-in-vscode
+  "editor.acceptSuggestionOnCommitCharacter": false,
+
+  // ref: antfu/eslint-config
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // could be very aggresive on an external workspace
+  // "editor.formatOnSave": false
+}

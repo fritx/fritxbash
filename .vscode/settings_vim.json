@@ -1,0 +1,105 @@
+{
+  "vim.useSystemClipboard": true,
+  "vim.surround": true,
+  "vim.sneak": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "A"],
+      "after": ["<esc>", "A"]
+    },
+    {
+      "before": ["j", "S"],
+      "after": ["<esc>", "s", "s"]
+    },
+    {
+      "before": ["j", "j"],
+      "after": ["<esc>", "l"]
+    },
+    {
+      "before": ["C-h"],
+      "after": ["<esc>", "i"]
+    },
+    {
+      "before": ["C-l"],
+      "after": ["<esc>", "l", "a"]
+    },
+    {
+      "before": ["C-j"],
+      "after": ["<esc>", "j", "a"]
+    },
+    {
+      "before": ["C-k"],
+      "after": ["<esc>", "k", "a"]
+    },
+    {
+      "before": ["j", "j"],
+      "after": ["<esc>", "l"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<space>", "h"],
+      "commands": ["workbench.action.moveEditorToPreviousGroup"]
+    },
+    {
+      "before": ["<space>", "l"],
+      "commands": ["workbench.action.moveEditorToNextGroup"]
+    },
+    {
+      "before": ["<space>", "j"],
+      "commands": ["workbench.action.moveEditorLeftInGroup"]
+    },
+    {
+      "before": ["<space>", "k"],
+      "commands": ["workbench.action.moveEditorRightInGroup"]
+    },
+    {
+      "before": ["<space>", "/"],
+      "after": ["A", " ", "/", "/", " ", "<esc>"]
+    },
+    {
+      "before": ["<space>", ";"],
+      "after": ["A", ";", "<esc>"]
+    },
+    {
+      "before": ["<space>", ","],
+      "after": ["A", ",", "<esc>"]
+    },
+    {
+      "before": [",", "<space>"],
+      "after": ["a", " ", "<esc>", "l"]
+    },
+    {
+      "before": [",", ";"],
+      "after": ["a", ";", "<esc>", "l"]
+    },
+    {
+      "before": [",", ","],
+      "after": ["a", ",", "<esc>", "l"]
+    },
+    {
+      "before": ["C-x"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["C-j"],
+      "commands": ["workbench.action.previousEditor"] // 同 Shift+Command+[/]
+    },
+    {
+      "before": ["C-k"],
+      "commands": ["workbench.action.nextEditor"] // 同 Shift+Command+[/]
+    },
+    {
+      "before": ["C-h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["C-l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    {
+      "before": ["s", "s"],
+      "commands": ["workbench.action.files.save"]
+    }
+  ]
+}
