@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "build:vscode": "cd .vscode && jsonmerge --jsonc settings_*.json > settings.json",
+    "lint": "eslint .",
+    "lint:fix": "npm run sort && eslint . --fix",
+    "sort": "sort-package-json"
+  },
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-fritx": "^0.2.4",
+    "jsonmerge": "^2.0.0",
+    "sort-package-json": "^1.57.0"
+  }
+}

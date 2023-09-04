@@ -17,13 +17,16 @@
     "*.wss": "javascript",
     "*.wxss": "css",
     "*.wxml": "html",
+    "*.cjson": "jsonc",
+    "*.wxs": "javascript"
   },
 
   "emmet.includeLanguages": {
     // vue, react
     "vue-html": "html",
     "vue": "html",
-    "javascript": "javascriptreact"
+    "javascript": "javascriptreact",
+    "wxml": "html"
   },
   "emmet.triggerExpansionOnTab": true,
 
@@ -39,4 +42,14 @@
   },
   // could be very aggresive on an external workspace
   // "editor.formatOnSave": false
+  "minapp-vscode.disableAutoConfig": true,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "git.openRepositoryInParentFolders": "never",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

@@ -23,6 +23,10 @@
 git clone https://github.com/fritx/fritxbash.git
 cd fritxbash
 
+# node related preparation
+npm install
+npm run build:vscode
+
 # setup private stuffs & sub-modules
 sh repo_setup.sh
 
