@@ -1,7 +1,9 @@
 {
   "vim.useSystemClipboard": true,
+  "vim.easymotion": true,
   "vim.surround": true,
   "vim.sneak": true,
+  "vim.leader": "<space>",
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "A"],
@@ -31,12 +33,23 @@
       "before": ["C-k"],
       "after": ["<esc>", "k", "a"]
     },
-    {
-      "before": ["j", "j"],
-      "after": ["<esc>", "l"]
-    }
   ],
   "vim.normalModeKeyBindings": [
+    {
+      "before": ["Z", "Z"],
+      "commands": [
+        "workbench.action.files.save",
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    {
+      "before": ["<space>", "w"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["s", "s"],
+      "commands": ["workbench.action.files.save"]
+    },
     {
       "before": ["<space>", "h"],
       "commands": ["workbench.action.moveEditorToPreviousGroup"]

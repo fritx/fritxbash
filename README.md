@@ -39,6 +39,12 @@ mv ~/.gitignore_global ~/.gitignore_global_bak
 sh repo_apply.sh
 # will link the files to your home dir `~/`
 
+# (MacOS only)
+export vsc_usr="$HOME/Library/Application Support/Code/User/settings.json"
+mv $vsc_usr .vscode/user_settings.backup.json
+cp .vscode/user_settings.json .vscode/user_settings.link.json
+ln -s $PWD/.vscode/user_settings.link.json $vsc_usr
+
 # from now on, you can hack anything here around `./` instead
 # like editing the .bashrc, .etc
 ```

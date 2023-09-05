@@ -1,7 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "build:vscode": "cd .vscode && jsonmerge --jsonc settings_*.json > settings.json",
+    "build:vscode:user": "cd .vscode && jsonmerge --jsonc user_settings_*.json > user_settings.json",
+    "build:vscode:home": "cd .vscode && jsonmerge --jsonc settings_*.json > settings.json",
+    "build:vscode": "npm run build:vscode:user && npm run build:vscode:home",
     "lint": "eslint .",
     "lint:fix": "npm run sort && eslint . --fix",
     "sort": "sort-package-json"
