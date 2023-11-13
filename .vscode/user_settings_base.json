@@ -1,0 +1,31 @@
+{
+  "search.exclude": {
+    "**/package-lock.json": true,
+    "**/pnpm-lock.yaml": true,
+    "**/yarn.lock": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  "files.trimFinalNewlines": true,
+  "editor.minimap.enabled": false,
+  "files.associations": {
+      "**/.vscode/settings_*.json": "jsonc",
+      ".gitignore*": "gitignore",
+      ".*rc": "json",
+      ".bash*": "shellscript",
+      ".zsh*": "shellscript",
+      ".npmrc": "dotenv",
+      ".env*": "dotenv",
+      "*.rules": "yaml",
+      "*.wss": "javascript",
+      "*.wxss": "css",
+      "*.wxml": "html",
+      "*.cjson": "jsonc",
+      "*.wxs": "javascript"
+  },
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "git.openRepositoryInParentFolders": "never",
+}

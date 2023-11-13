@@ -74,6 +74,9 @@ ZSH_CUSTOM="$FRITXBASH_PATH/zsh_custom"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  history
+  autojump
+  docker-compose
   zsh-autosuggestions
   # put it in the last
   zsh-syntax-highlighting

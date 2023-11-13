@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# git
+function gspp() {
+    not_clean=$(git status --porcelain)
+    dt=$(date '+%Y-%m-%d_%H:%M:%S')
+    if [ $not_clean ] ; then
+        git stash push -m "$dt"
+    fi
+    git pull --rebase
+    if [ $not_clean ] ; then
+        git stash pop "stash@{$dt}"
+    fi
+}
+
+# npm rush register
+function npm_reg() {
+  # ~/d is the directory where i develop
+  cd ~/d
+  mkd "$1"
+  npm init -y
+  # version `0.0.0` instead of `1.0.0`
+  cat package.json | \
+    js -to 'x.version = `0.0.0`, JSON.stringify(x, null, 2)+`\n`'  \
+    > package.json
+  npm publish
+}
+
+# short for imagemin
+function imgmin() {
+  imagemin $1 --out-dir .
+}
+
+# prepend text to file
+# https://unix.stackexchange.com/questions/56975/whats-the-command-to-prepend-a-line-to-a-file
+function prepend() {
+  local text=$2
+  local file=$1
+  local tmpfile="$file.prepend.tmp"
+  (echo $text; cat $file) > $tmpfile; mv $tmpfile $file
+}
+
+export PATH=$PATH:$HOME/bin
+alias k=kanban
+
+# proxy
+function proxy_on() {
+  export https_proxy=http://127.0.0.1:8118 http_proxy=http://127.0.0.1:8118 all_proxy=socks5://127.0.0.1:8119
+  export HTTPS_PROXY=http://127.0.0.1:8118 HTTP_PROXY=http://127.0.0.1:8118 ALL_PROXY=socks5://127.0.0.1:8119
+}
+function proxy_off() {
+  unset https_proxy http_proxy all_proxy
+  unset HTTPS_PROXY HTTP_PROXY ALL_PROXY
+}

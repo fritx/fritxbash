@@ -5,7 +5,7 @@
   "editor.minimap.enabled": false,
 
   "files.associations": {
-    "**/.vscode/settings_*.json": "jsonc",
+    "**/.vscode/*settings*.json": "jsonc",
     ".gitignore*": "gitignore",
     ".*rc": "json",
     ".bash*": "shellscript",
@@ -13,12 +13,11 @@
     ".npmrc": "dotenv",
     ".env*": "dotenv",
     "*.rules": "yaml",
+    "*.cjson": "jsonc",
     // wechat mini programs
     "*.wss": "javascript",
     "*.wxss": "css",
     "*.wxml": "html",
-    "*.cjson": "jsonc",
-    "*.wxs": "javascript"
   },
 
   "emmet.includeLanguages": {
