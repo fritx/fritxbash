@@ -18,7 +18,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pnpm
-export PNPM_HOME="/Users/fritx/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
@@ -161,7 +161,7 @@ alias plop='less ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f
 # fi
 
 # pyenv, personal
-# export PATH="$PATH:/Users/fritx/.pyenv/shims"
+# export PATH="$PATH:$HOME/.pyenv/shims"
 
 # golang
 # Update your PATH so that the protoc compiler can find the plugins:

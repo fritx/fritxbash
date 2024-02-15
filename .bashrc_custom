@@ -2,15 +2,17 @@
 
 # git
 function gspp() {
-    not_clean=$(git status --porcelain)
+    not_clean=$(if [ -n "$(git status --porcelain)" ]; then echo true; else echo false; fi)
     dt=$(date '+%Y-%m-%d_%H:%M:%S')
-    if [ $not_clean ] ; then
-        git stash push -m "$dt"
+    if [ $not_clean = true ] ; then
+        git stash push -u -m "$dt"
     fi
     git pull --rebase
-    if [ $not_clean ] ; then
-        git stash pop "stash@{$dt}"
+    if [ $not_clean = true ] ; then
+        git stash pop
     fi
+    git add -A
+    git reset
 }
 
 # npm rush register
@@ -47,6 +49,9 @@ alias k=kanban
 function proxy_on() {
   export https_proxy=http://127.0.0.1:8118 http_proxy=http://127.0.0.1:8118 all_proxy=socks5://127.0.0.1:8119
   export HTTPS_PROXY=http://127.0.0.1:8118 HTTP_PROXY=http://127.0.0.1:8118 ALL_PROXY=socks5://127.0.0.1:8119
+  # Proxies and VPNs | minikube
+  # https://minikube.sigs.k8s.io/docs/handbook/vpn_and_proxy/
+  export NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24
 }
 function proxy_off() {
   unset https_proxy http_proxy all_proxy
