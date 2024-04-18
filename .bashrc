@@ -179,5 +179,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # bun completions
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
+# nue
+# bun does not support older MacOS, use node instead
+alias nu="node $(which nue)"
+
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

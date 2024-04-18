@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function rndpwd() {
+    openssl rand -base64 32
+}
+
 # git
 function gspp() {
     not_clean=$(if [ -n "$(git status --porcelain)" ]; then echo true; else echo false; fi)
