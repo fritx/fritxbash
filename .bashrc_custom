@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# lookup an ip
+function sip() {
+  # ip138不直接支持ipv6
+  # 使用[[ 和 =~ 进行模式匹配，检查字符串是否包含冒号
+  if [[ $1 =~ : ]]; then
+    open https://www.ipshudi.com/$1.htm
+  else
+    open https://www.ip138.com/iplookup.php?ip=$1
+  fi
+}
+
+# random password
 function rndpwd() {
     openssl rand -base64 32
 }

@@ -61,13 +61,14 @@ alias bss='. ~/.bashrc'
 # export NPM='pnpm'  # use pnpm
 # alias ni="$NPM i"  # prefer @antfu/ni
 # alias nui="$NPM uninstall"  # prefer @antfu/nu
-alias nt='npm test'
-alias ns='npm start'
+alias nig='pnpm i -g'
+alias nt='nr test'
+alias ns='nr start'
 alias nw='nr watch'
 # alias nr='npm run'
 alias nb='nr build'
-alias niif='npm init --force && echo package-lock=false >> .npmrc'
 alias nd='nr dev'
+alias niif='npm init --force && echo package-lock=false >> .npmrc'
 alias y='yarn'
 alias ya='yarn add'
 alias yt='yarn test'
@@ -124,17 +125,43 @@ export PATH="$PATH:$HOME/flutter/bin"
 
 # android studio
 # https://developer.android.com/studio/command-line/variables
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+# export ANDROID_HOME=~/Library/Android/sdk
+# export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 # sdkmanager
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+# export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+# android studio 2023
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # java jdk
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/jre
+# export JDK_HOME="$HOME/jdk-21.0.2.jdk/Contents/Home"
+# export JAVA_HOME=$JDK_HOME
+# export PATH="$JDK_HOME/bin:$PATH"
+export PATH="$HOME/jdk-21.0.2.jdk/Contents/Home/bin:$PATH"
+export PATH="$PATH:$HOME/apache-maven-3.9.6/bin"
 
+# Python2
+# export PATH=$PATH:$HOME/Library/Python/2.7/bin
+# Python3
+export PATH=$PATH:/usr/local/Cellar/python@3.11/3.11.6/bin
+export PATH=$PATH:$HOME/Library/Python/3.11/bin  # for `pip3 install --user`
+# alias python2=$(which python)
+# hacking: can not rm pip3 from another user(wheel) via sudo
+# `ln -s /usr/local/Cellar/python@3.11/3.11.6/bin/python3 /usr/local/bin/python3` instead
+# `ln -s /usr/local/Cellar/python@3.11/3.11.6/bin/python3 /usr/local/bin/python` instead
+# `ln -s /usr/local/Cellar/python@3.11/3.11.6/bin/pip3 /usr/local/bin/pip3` instead
+# `ln -s /usr/local/Cellar/python@3.11/3.11.6/bin/pip3 /usr/local/bin/pip` instead
+# alias pip2=$(which pip)
+# alias pip3=/usr/local/Cellar/python@3.11/3.11.6/bin/pip3
+# alias python=python3
+# alias pip=pip3
 # Python3 edge-tts
-export PATH=$PATH:$HOME/Library/Python/3.8/bin
+# export PATH=$PATH:$HOME/Library/Python/3.8/bin
+# 可能由于设置了国内镜像 `pip install`需要关掉代理 否则速度很慢
+alias pi='proxy_off && pip install'
 
 # bin
 export PATH="$PATH:$FRITXBASH_PATH/bin"
@@ -169,6 +196,7 @@ alias plop='less ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f
 # export PATH="$PATH:$(go env GOPATH)/bin"
 export GO_HOME=$HOME/go
 export PATH="$PATH:$GO_HOME/bin"
+export GOPROXY=https://goproxy.cn,direct
 
 # tmux
 export TMUX_TMPDIR=~/.tmux/tmp
@@ -182,6 +210,27 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # nue
 # bun does not support older MacOS, use node instead
 alias nu="node $(which nue)"
+
+# GitHub CLI
+export PATH="$PATH:$HOME/gh_2.44.1_macOS_amd64/bin"
+
+# rust & cargo
+# . "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# youtube-dl (only works w/ build-from-source)
+# https://github.com/ytdl-org/youtube-dl
+export PYTHONPATH="$PYTHONPATH:$HOME/g/youtube-dl"
+alias youtube-dl='python -m youtube_dl -f mp4 -o "$HOME/Downloads/%(title)s_%(id)s.%(ext)s"'
+alias ydl='youtube-dl'
+
+# bun is not supported in old MacOS
+# Run: npm i -g nuekit@0.3.2 (pnpm i -g not working either)
+# Run: pnpm i -D esbuild
+# Run: nu && nu build --production
+NUE=$(which nue)
+alias nu="node $NUE"
+alias nue="node $NUE"
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post
