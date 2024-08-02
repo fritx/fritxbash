@@ -11,6 +11,8 @@ setopt no_nomatch
 # 支持code命令 打开vscode
 # https://stackoverflow.com/questions/29963617/how-to-call-vs-code-editor-from-command-line
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# zed
+alias zed='/Applications/Zed.app/Contents/MacOS/cli'
 
 # nvm load
 export NVM_DIR="$HOME/.nvm"
@@ -22,9 +24,11 @@ export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
-# mirrows
-export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
-export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
+# mirrors
+# export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+# export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/
+export ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/
 
 # nodejs memory limit
 # https://www.npmjs.com/package/increase-memory-limit
@@ -50,7 +54,10 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias v='vim'
 alias co='code'
 alias co.='code .'
-alias e='code'
+alias z='zed'
+alias z.='z .'
+# alias e='code'
+alias e='zed'
 alias e.='e .'
 alias o='open'
 alias o.='open .'
@@ -103,6 +110,8 @@ alias .....='cd ../../../..'
 alias prs="pm2 resurrect"
 alias mgd="mongod --config /usr/local/etc/mongod.conf"
 alias rds="redis-server /usr/local/etc/redis.conf"
+# pm2-go
+export PATH="$PATH:$HOME/we-arch/pm2-go/bin"
 
 # docker
 alias dps='docker ps'
@@ -146,8 +155,9 @@ export PATH="$PATH:$HOME/apache-maven-3.9.6/bin"
 # Python2
 # export PATH=$PATH:$HOME/Library/Python/2.7/bin
 # Python3
-export PATH=$PATH:/usr/local/Cellar/python@3.11/3.11.6/bin
-export PATH=$PATH:$HOME/Library/Python/3.11/bin  # for `pip3 install --user`
+# export PATH=$HOME/Library/Python/3.11/bin:$PATH  # for `pip3 install --user`
+# export PATH=$HOME/Library/Python/3.7/bin:$PATH  # for `pip3 install --user`
+export PATH=/usr/local/Cellar/python@3.11/3.11.6/bin:$PATH
 # alias python2=$(which python)
 # hacking: can not rm pip3 from another user(wheel) via sudo
 # `ln -s /usr/local/Cellar/python@3.11/3.11.6/bin/python3 /usr/local/bin/python3` instead
@@ -196,6 +206,7 @@ alias plop='less ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f
 # export PATH="$PATH:$(go env GOPATH)/bin"
 export GO_HOME=$HOME/go
 export PATH="$PATH:$GO_HOME/bin"
+# https://goproxy.cn/
 export GOPROXY=https://goproxy.cn,direct
 
 # tmux

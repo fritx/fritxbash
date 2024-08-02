@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# ollama
+function ask() {
+    curl http://localhost:11434/api/chat -d "{
+        \"model\": \"${2-qwen2:0.5b}\", \"stream\": false,
+        \"messages\": [
+            { \"role\": \"user\", \"content\": \"$1\" }
+        ]
+    }"
+}
+alias a=ask
+
 # lookup an ip
 function sip() {
   # ip138不直接支持ipv6
@@ -59,7 +70,10 @@ function prepend() {
 }
 
 export PATH=$PATH:$HOME/bin
-alias k=kanban
+# alias k=kanban
+alias k=kubectl
+alias kc=kubectl
+alias mk=minikube
 
 # proxy
 function proxy_on() {

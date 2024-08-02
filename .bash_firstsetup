@@ -38,9 +38,15 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 # 复制启动命令到 ~/.bashrc -- echo ... > ~/.bashrc
 # 设置nvm镜像 - https://www.jianshu.com/p/bc56e70303f7
-export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+# nvm ls-remote returns N/A #3322
+# https://github.com/nvm-sh/nvm/issues/3322
+# export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+# export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/node
 export chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver
 export puppeteer_download_host=https://cdn.npm.taobao.org/dist
+# 默认禁用puppeteer可执行文件下载 需要时再手动开启
+# https://github.com/puppeteer/puppeteer/issues/244
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 brew cask install sogouinput alfred iterm2 spectacle google-chrome visual-studio-code sourcetree
 brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevtools
