@@ -61,6 +61,7 @@ alias e='zed'
 alias e.='e .'
 alias o='open'
 alias o.='open .'
+alias ol='ollama'
 alias bse="e $FRITXBASH_PATH"
 alias bss='. ~/.bashrc'
 
@@ -95,6 +96,7 @@ alias fy='fanyi'
 # alias gch='g checkout'
 # alias gspp="gsta && gup && gstp"
 # alias gspp="gsta -u && gup && (gstp || true) && ga . && g reset ."
+alias g.="go run ."
 alias wh='which'
 alias whapp='whichapp'
 alias js='jayin'
@@ -150,7 +152,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # export JAVA_HOME=$JDK_HOME
 # export PATH="$JDK_HOME/bin:$PATH"
 export PATH="$HOME/jdk-21.0.2.jdk/Contents/Home/bin:$PATH"
-export PATH="$PATH:$HOME/apache-maven-3.9.6/bin"
+# export PATH="$PATH:$HOME/apache-maven-3.9.6/bin"
+export PATH="$HOME/apache-maven-3.9.8/bin:$PATH"
 
 # Python2
 # export PATH=$PATH:$HOME/Library/Python/2.7/bin
@@ -242,6 +245,10 @@ alias ydl='youtube-dl'
 NUE=$(which nue)
 alias nu="node $NUE"
 alias nue="node $NUE"
+
+# rye
+# https://rye.astral.sh/guide/installation/
+source "$HOME/.rye/env"
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

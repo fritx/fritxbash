@@ -21,6 +21,41 @@ function sip() {
     open https://www.ip138.com/iplookup.php?ip=$1
   fi
 }
+function sre() {
+    # if [[ -z $1 ]]; then
+    if [ $# -lt 1 ]; then
+        echo "缺少参数"
+        return 1
+    fi
+    grep -C 10 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
+    grep -C 10 $1 ~/we-mid/bec-analysis/regionmap/src/data/map.js
+}
+function geo() {
+    if [ $# -lt 1 ]; then
+        echo "缺少参数"
+        return 1
+    fi
+    hgrep $1 ~/Documents/100000_full_city.json 1 60
+}
+function hgrep() {
+    if [ $# -lt 2 ]; then
+        echo "缺少参数"
+        return 1
+    fi
+    lf="${3:-60}"
+    rt="${4:-$lf}"
+    awk -v kw="$1" -v lf="$lf" -v rt="$rt" '{
+        idx=index($0,kw);
+        if (idx>0) {
+            start=idx-lf;  # 包括关键词前5个字符
+            end=idx+length(kw)+rt;  # 包括关键词后5个字符
+            # 确保不会超出文本范围
+            start=(start<1)?1:start;
+            end=(end>length($0))?length($0):end;
+            print substr($0,start,end-start+1);
+        }
+    }' $2
+}
 
 # random password
 function rndpwd() {
