@@ -1,5 +1,4 @@
-# Modified from:
-# https://github.com/skylerlee/zeta-zsh-theme/blob/master/zeta.zsh-theme
+# Credits: https://github.com/skylerlee/zeta-zsh-theme/blob/master/zeta.zsh-theme
 
 # Zeta theme for oh-my-zsh
 # Tested on Linux, Unix and Windows under ANSI colors.
@@ -110,12 +109,13 @@ function get_space {
 #     local right_prompt="%{$blue%}($(get_time_stamp))%{$reset_color%} "
 #     print -rP "$left_prompt$(get_space $left_prompt $right_prompt)$right_prompt"
 # }
+# my custom
 function print_prompt_head {
     local left_prompt="\
 %{$yellow_bold%}$(get_current_dir)%{$reset_color%}\
 $(get_git_prompt) "
     local time_prompt="%{$blue%}($(get_time_stamp))%{$reset_color%} "
-    left_prompt="${time_prompt}$left_prompt"
+    left_prompt="$time_prompt$left_prompt"
     print -rP $left_prompt
 }
 
@@ -132,4 +132,5 @@ add-zsh-hook precmd print_prompt_head
 setopt prompt_subst
 
 PROMPT='$(get_prompt_indicator)'
+# my custom
 # RPROMPT='$(git_prompt_short_sha) '
