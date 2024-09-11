@@ -8,3 +8,6 @@ node_modules
 .vscode/user_settings.json
 .vscode/user_settings.backup.json
 .vscode/user_settings.link.json
+
+# ln -s but gitignore
+.npmrc
