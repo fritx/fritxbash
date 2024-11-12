@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 
+# github raw mirror
+gitrawdown() {
+    if [ $# -lt 2 ]; then
+        echo "缺少参数"
+        return 1
+    fi
+    local url=$(echo $1 | \
+        sed 's|github.com/\(.*\)/\(.*\)/blob/\(.*\)|raw.githubusercontent.com/\1/\2/refs/heads/\3|g' | \
+        sed 's|raw.githubusercontent.com|raw.gitmirror.com|')
+    echo "Downloading... $url"
+    echo "=> $2"
+    curl -fL $url > $2
+}
+# ocr
+# https://gitee.com/we-mid/go/blob/main/ocr
+# go install gitee.com/we-mid/go/ocr/cmd/ocrscan@latest
+ocr() {
+    (
+        # best经常遗漏第一行 不可取
+        # export TESSDATA_PREFIX=~/we-mid/go/ocr/tessdata_best
+        export TESSDATA_PREFIX=~/we-mid/go/ocr/tessdata_fast
+        # ocrscan -l eng,chi_sim ${1:-'-c'}
+        # ocrscan -l chi_sim,eng ${1:-'-c'}
+        ocrscan -l chi_sim ${1:-'-c'}
+    )
+}
+
 # ollama
 function ask() {
     curl http://localhost:11434/api/chat -d "{
@@ -11,15 +38,34 @@ function ask() {
 }
 alias a=ask
 
+# electron-forge packaging
+function efpack() {
+    PRODUCT_NAME=$(jq -r '.productName' package.json)
+    yarn package
+    codesign --deep --force --verbose --sign - out/$PRODUCT_NAME-darwin-universal/$PRODUCT_NAME.app
+}
+function efopen() {
+    PRODUCT_NAME=$(jq -r '.productName' package.json)
+    open out/Track-darwin-universal/$PRODUCT_NAME.app
+}
+
 # lookup an ip
 function sip() {
   # ip138不直接支持ipv6
   # 使用[[ 和 =~ 进行模式匹配，检查字符串是否包含冒号
   if [[ $1 =~ : ]]; then
-    open https://www.ipshudi.com/$1.htm
+    open "https://www.ipshudi.com/$1.htm"
   else
-    open https://www.ip138.com/iplookup.php?ip=$1
+    open "https://www.ip138.com/iplookup.php?ip=$1"
   fi
+}
+function ipp() {
+    if [ $# -lt 1 ]; then
+        echo "缺少参数"
+        return 1
+    fi
+    grep -C 10 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
+    grep -C 10 $1 ~/we-mid/bec-infra/svc_apis/ip2r_patch.txt
 }
 function sre() {
     # if [[ -z $1 ]]; then
@@ -28,6 +74,8 @@ function sre() {
         return 1
     fi
     grep -C 10 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
+    grep -C 10 $1 ~/we-mid/bec-infra/svc_apis/ip2r_patch.txt
+    echo "---"
     grep -C 10 $1 ~/we-mid/bec-analysis/regionmap/src/data/map.js
 }
 function geo() {
@@ -35,7 +83,8 @@ function geo() {
         echo "缺少参数"
         return 1
     fi
-    hgrep $1 ~/Documents/100000_full_city.json 1 60
+    out_city=$(hgrep $1 ~/Documents/100000_full_city.json 1 60)
+    [ -n "$out_city" ] && echo $out_city || hgrep $1 ~/Documents/100000_full.json 1 60
 }
 function hgrep() {
     if [ $# -lt 2 ]; then
@@ -59,7 +108,12 @@ function hgrep() {
 
 # random password
 function rndpwd() {
-    openssl rand -base64 32
+    local n=$1
+    r=$(openssl rand -base64 32)
+    if [ -n "$n" ]; then
+      r=$(echo $r | cut -c-1-$n)
+    fi
+    echo $r
 }
 
 # git

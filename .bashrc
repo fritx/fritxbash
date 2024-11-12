@@ -5,7 +5,9 @@
 
 # linux 解决"zsh: no matches found"
 # https://blog.csdn.net/qq_36148847/article/details/79260745
-setopt no_nomatch
+# 尝试解决: bash -c 'xxxx' 报错 setopt: command not found
+# setopt no_nomatch
+# setopt no_nomatch 2>/dev/null || shopt -s nullglob
 
 # vscode
 # 支持code命令 打开vscode
@@ -84,10 +86,12 @@ alias ys='yarn start'
 alias yw='yarn watch'
 alias yb='yarn build'
 alias yd='yarn dev'
-alias b='brew'
-alias bs='brew search'
-alias bi='brew install'
-alias bci='brew cask install'
+alias b='bash'
+alias bs='bash'
+# alias br='brew'
+# alias bs='brew search'
+# alias bi='brew install'
+# alias bci='brew cask install'
 alias ws='w2 start'
 alias prs='pm2 resurrect'
 alias fy='fanyi'
@@ -96,7 +100,8 @@ alias fy='fanyi'
 # alias gch='g checkout'
 # alias gspp="gsta && gup && gstp"
 # alias gspp="gsta -u && gup && (gstp || true) && ga . && g reset ."
-alias g.="go run ."
+alias g.="go mod tidy && go run ."
+alias gt="go test"
 alias wh='which'
 alias whapp='whichapp'
 alias js='jayin'
