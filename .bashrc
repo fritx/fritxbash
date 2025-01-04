@@ -8,6 +8,7 @@
 # 尝试解决: bash -c 'xxxx' 报错 setopt: command not found
 # setopt no_nomatch
 # setopt no_nomatch 2>/dev/null || shopt -s nullglob
+setopt NONOMATCH
 
 # vscode
 # 支持code命令 打开vscode
@@ -34,7 +35,7 @@ export ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/
 
 # nodejs memory limit
 # https://www.npmjs.com/package/increase-memory-limit
-export NODE_OPTIONS=--max_old_space_size=4096
+# export NODE_OPTIONS=--max_old_space_size=4096
 
 # sourcetree中 git提交pre-commit 报错node找不到
 # https://juejin.im/post/5cbd790cf265da037a3cea95
@@ -122,9 +123,16 @@ export PATH="$PATH:$HOME/we-arch/pm2-go/bin"
 
 # docker
 alias dps='docker ps'
-alias dim='docker images'
+alias dims='docker images'
+alias dim='docker image'
+alias dvl='docker volume'
+alias dpl='docker pull'
 alias drm='docker rm'
-alias dr='docker run'
+alias dst='docker stop'
+alias drn='docker run'
+alias dcp='docker compose'
+alias dup='docker compose up'
+alias ddn='docker compose down'
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
@@ -212,10 +220,12 @@ alias plop='less ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f
 # Update your PATH so that the protoc compiler can find the plugins:
 # https://grpc.io/docs/languages/go/quickstart/
 # export PATH="$PATH:$(go env GOPATH)/bin"
-export GO_HOME=$HOME/go
+# export GO_HOME=$HOME/go
+export GO_HOME=/usr/local/go
 export PATH="$PATH:$GO_HOME/bin"
 # https://goproxy.cn/
 export GOPROXY=https://goproxy.cn,direct
+alias ggdu="$GO_HOME/bin/gdu"  # conflict with `du (GNU coreutils) 9.5`
 
 # tmux
 export TMUX_TMPDIR=~/.tmux/tmp
@@ -253,7 +263,7 @@ alias nue="node $NUE"
 
 # rye
 # https://rye.astral.sh/guide/installation/
-source "$HOME/.rye/env"
+# source "$HOME/.rye/env"
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

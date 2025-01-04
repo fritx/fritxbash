@@ -13,10 +13,37 @@ alias c="tr -d '\n' | pbcopy"
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"  # not working
+function ipbyfly() {
+  json=`curl -sSL https://ip.fly.dev/all.json`
+  echo res: $json
+  echo IP: `echo $json | jq -r .ip_address`
+}
+function ipbyipinfo() {
+  json=`curl -sSL https://ipinfo.io/ -H accept-type=application/json`
+  echo res: $json
+  echo IP: `echo $json | jq -r .ip`
+}
+function ipbyhttpbin() {
+  json=`curl -sSL https://httpbin.org/ip`
+  echo res: $json
+  echo IP: `echo $json | jq -r .origin`
+}
+function ip() {
+  # ipbyfly
+  ipbyhttpbin
+}
+
 alias localip="ipconfig getifaddr en0 || ipconfig getifaddr en1" # fixme
 alias lip='localip'
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+if ! type realpath >/dev/null; then
+  function realpath() {
+    dir=$(cd "$(dirname "$0")" && pwd -P)
+    echo "${dir}/$1"
+  }
+fi
 
 # prints path to app
 function whichapp() {
