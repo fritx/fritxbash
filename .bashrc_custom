@@ -165,14 +165,25 @@ alias kc=kubectl
 alias mk=minikube
 
 # proxy
-function proxy_on() {
+function proxyenable() {
+  networksetup -setwebproxystate "Wi-Fi" on
+  networksetup -setsecurewebproxystate "Wi-Fi" on
+  networksetup -setsocksfirewallproxystate "Wi-Fi" on
+}
+function proxydisable() {
+  networksetup -setwebproxystate "Wi-Fi" off
+  networksetup -setsecurewebproxystate "Wi-Fi" off
+  networksetup -setsocksfirewallproxystate "Wi-Fi" off
+}
+function proxyon() {
+  networksetup -getwebproxy "Wi-Fi" | grep -q 'Enabled: Yes' || echo '[warn] proxy is not enabled now. Run `proxyenable` first'
   export https_proxy=http://127.0.0.1:8118 http_proxy=http://127.0.0.1:8118 all_proxy=socks5://127.0.0.1:8119
   export HTTPS_PROXY=http://127.0.0.1:8118 HTTP_PROXY=http://127.0.0.1:8118 ALL_PROXY=socks5://127.0.0.1:8119
   # Proxies and VPNs | minikube
   # https://minikube.sigs.k8s.io/docs/handbook/vpn_and_proxy/
   export NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24
 }
-function proxy_off() {
+function proxyoff() {
   unset https_proxy http_proxy all_proxy
   unset HTTPS_PROXY HTTP_PROXY ALL_PROXY
 }

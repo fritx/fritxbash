@@ -60,7 +60,8 @@ brew cask install charles db-browser-for-sqlite youdaodict firefox wechatwebdevt
 # sourcetree git设置 合并时不使用快进 *追踪分支默认变基
 
 # node20 LTS
-export NVM_DEFAULT_NODE='20'
+# export NVM_DEFAULT_NODE='20'
+export NVM_DEFAULT_NODE='22'
 nvm install $NVM_DEFAULT_NODE
 nvm alias default $NVM_DEFAULT_NODE
 

@@ -117,6 +117,7 @@ alias .....='cd ../../../..'
 # pm2 & db
 alias prs="pm2 resurrect"
 alias mgd="mongod --config /usr/local/etc/mongod.conf"
+alias rds="(cd ~ && redis-server --bind 127.0.0.1)"  # 默认零配置会在pwd产生dump.rdb
 alias rds="redis-server /usr/local/etc/redis.conf"
 # pm2-go
 export PATH="$PATH:$HOME/we-arch/pm2-go/bin"
@@ -220,9 +221,10 @@ alias plop='less ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f
 # Update your PATH so that the protoc compiler can find the plugins:
 # https://grpc.io/docs/languages/go/quickstart/
 # export PATH="$PATH:$(go env GOPATH)/bin"
-# export GO_HOME=$HOME/go
-export GO_HOME=/usr/local/go
+export GO_ROOT=/usr/local/go
+export GO_HOME=$HOME/go
 export PATH="$PATH:$GO_HOME/bin"
+export PATH="$PATH:$GO_ROOT/bin"
 # https://goproxy.cn/
 export GOPROXY=https://goproxy.cn,direct
 alias ggdu="$GO_HOME/bin/gdu"  # conflict with `du (GNU coreutils) 9.5`
