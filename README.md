@@ -1,8 +1,9 @@
 **Todo**
 
-- user prompts
-- vps.bash_firstsetup
-- vps.bashrc
+- [x] user prompts
+- [x] vps.bash_firstsetup
+- [x] vps.bashrc (in private repos)
+- [x] gspp & continuous improvements
 
 **Files to apply**
 
