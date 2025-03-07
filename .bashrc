@@ -267,5 +267,11 @@ alias nue="node $NUE"
 # https://rye.astral.sh/guide/installation/
 # source "$HOME/.rye/env"
 
+# google chrome
+alias google-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+# google-chrome --version
+# google-chrome --headless=new --remote-debugging-port=9222
+# google-chrome --user-data-dir=/tmp/bench_chrome --headless=new --dump-dom https://fritx.me"
+
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

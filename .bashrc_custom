@@ -124,12 +124,19 @@ function rndpwd() {
 
 # git
 function gspp() {
-    local notclean=$(if [ -n "$(git status --porcelain)" ]; then echo true; else echo false; fi)
+    local lswip="$(ls -a .wip-git-stash* 2>/dev/null)"
+    if [ -n "$lswip" ]; then
+      echo "Found $lswip"
+      echo 'Please check with `git stash list` and remove .wip-git-stash* before you process gspp'
+      return 1
+    fi
+    local notclean=$(test -n "$(git status --porcelain)" && echo true || echo false)
     local dt="$(date '+%Y-%m-%d_%H:%M:%S')"
     local wipfile=".wip-git-stash-u_$(echo "$dt" | sed 's/:/-/g')"
+
     function _gspp() {
         echo "...gspp stage 1. stash..."
-        if [ $notclean = true ] ; then
+        if [ $notclean = true ]; then
             local wipctn="$(git status)\n\n---\n\n$(git log | head -n 10)"
             git stash push -u -m "$dt"
             echo "$wipctn" > "$wipfile"
@@ -140,7 +147,7 @@ function gspp() {
     }
     function _finally() {
         echo "...gspp stage 3. pop..."
-        if [ $notclean = true ] ; then
+        if [ $notclean = true ]; then
             git stash pop
             rm "$wipfile"
         fi
@@ -151,10 +158,12 @@ function gspp() {
     }
     (
         # 绑定信号并在原函数执行前后管理陷阱
+        # trap '_finally; exit 1' EXIT
         trap '_finally; exit 130' SIGINT
         trap '_finally; exit 131' SIGQUIT
         trap '_finally; exit 143' SIGTERM
         _gspp "$@"
+        # trap - EXIT  # 执行完后恢复默认信号行为
         trap - SIGINT SIGQUIT SIGTERM  # 执行完后恢复默认信号行为
     )
 }
