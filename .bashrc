@@ -8,7 +8,7 @@
 # 尝试解决: bash -c 'xxxx' 报错 setopt: command not found
 # setopt no_nomatch
 # setopt no_nomatch 2>/dev/null || shopt -s nullglob
-setopt NONOMATCH
+setopt NONOMATCH 2>/dev/null || shopt -s nullglob 2>/dev/null
 
 # vscode
 # 支持code命令 打开vscode

@@ -124,7 +124,10 @@ function rndpwd() {
 
 # git
 function gspp() {
-    local lswip="$(ls -a .wip-git-stash* 2>/dev/null)"
+    local customfn="$1"
+    # fix ls behavior when gspp called in other scripts
+    # local lswip="$(ls -a .wip-git-stash* 2>/dev/null)"
+    local lswip="$(sh -c 'ls -a .wip-git-stash* 2>/dev/null')"
     if [ -n "$lswip" ]; then
       echo "Found $lswip"
       echo 'Please check with `git stash list` and remove .wip-git-stash* before you process gspp'
@@ -141,8 +144,13 @@ function gspp() {
             git stash push -u -m "$dt"
             echo "$wipctn" > "$wipfile"
         fi
-        echo "...gspp stage 2. pull..."
-        git pull --rebase
+        if [ -n "$customfn" ]; then
+            echo "...gspp stage 2. custom fn..."
+            $customfn
+        else
+            echo "...gspp stage 2. pull..."
+            git pull --rebase
+        fi
         _finally
     }
     function _finally() {
@@ -158,12 +166,10 @@ function gspp() {
     }
     (
         # 绑定信号并在原函数执行前后管理陷阱
-        # trap '_finally; exit 1' EXIT
         trap '_finally; exit 130' SIGINT
         trap '_finally; exit 131' SIGQUIT
         trap '_finally; exit 143' SIGTERM
-        _gspp "$@"
-        # trap - EXIT  # 执行完后恢复默认信号行为
+        _gspp
         trap - SIGINT SIGQUIT SIGTERM  # 执行完后恢复默认信号行为
     )
 }
