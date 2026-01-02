@@ -4,3 +4,5 @@ for f in {'.vscode/settings.json',.bash_profile,.bashrc,.bashrc_include,.bashrc_
   [ -r $f ] && [ -e $f ] && ln -s "$FRITXBASH_PATH/$f" "$HOME/$f"
 done
 unset f
+
+ln -s "$FRITXBASH_PATH/zed_settings.json" "$HOME/.config/zed/settings.json"

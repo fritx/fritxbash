@@ -134,6 +134,7 @@ alias drn='docker run'
 alias dcp='docker compose'
 alias dup='docker compose up'
 alias ddn='docker compose down'
+alias drmnone='docker rmi $(docker images -f "dangling=true" -q)'
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
@@ -227,6 +228,7 @@ export PATH="$PATH:$GO_HOME/bin"
 export PATH="$PATH:$GO_ROOT/bin"
 # https://goproxy.cn/
 export GOPROXY=https://goproxy.cn,direct
+# gdu
 alias ggdu="$GO_HOME/bin/gdu"  # conflict with `du (GNU coreutils) 9.5`
 
 # tmux
@@ -249,11 +251,18 @@ export PATH="$PATH:$HOME/gh_2.44.1_macOS_amd64/bin"
 # . "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
 
+YDL_UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+YDL_DES="-f mp4 -o '$HOME/Downloads/%(title)s_%(id)s.%(ext)s'"
 # youtube-dl (only works w/ build-from-source)
 # https://github.com/ytdl-org/youtube-dl
 export PYTHONPATH="$PYTHONPATH:$HOME/g/youtube-dl"
-alias youtube-dl='python -m youtube_dl -f mp4 -o "$HOME/Downloads/%(title)s_%(id)s.%(ext)s"'
+alias youtube-dl="python -m youtube_dl --user-agent '$YDL_UA' $YDL_DES"
 alias ydl='youtube-dl'
+# yt-dlp
+# export PYTHONPATH="$PYTHONPATH:$HOME/Library/Python/3.11/bin"
+# export PYTHONPATH="$PYTHONPATH:$HOME/g/yt-dlp"
+alias ydp="yt-dlp --user-agent '$YDL_UA' $YDL_DES"
+# alias ydl='ydp'
 
 # bun is not supported in old MacOS
 # Run: npm i -g nuekit@0.3.2 (pnpm i -g not working either)

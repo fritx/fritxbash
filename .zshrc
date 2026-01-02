@@ -76,7 +76,7 @@ plugins=(
   git
   history
   autojump
-  docker-compose
+  # docker-compose
   zsh-autosuggestions
   # put it in the last
   zsh-syntax-highlighting
