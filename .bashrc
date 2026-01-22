@@ -1,5 +1,6 @@
 # personal private stuffs (-pre)
 . ~/.bashrc_private_pre
+. ~/.bashrc_private_vps
 . ~/.bashrc_include
 . ~/.bashrc_custom
 
@@ -21,11 +22,6 @@ alias zed='/Applications/Zed.app/Contents/MacOS/cli'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
 
 # mirrors
 # export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
@@ -49,8 +45,13 @@ alias openst='(/Applications/SourceTree.app/Contents/MacOS/SourceTree &)'
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
+
+# yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # alias
@@ -76,7 +77,7 @@ alias nig='pnpm i -g'
 alias nt='nr test'
 alias ns='nr start'
 alias nw='nr watch'
-# alias nr='npm run'
+alias nr='npm run'
 alias nb='nr build'
 alias nd='nr dev'
 alias niif='npm init --force && echo package-lock=false >> .npmrc'
@@ -101,6 +102,8 @@ alias fy='fanyi'
 # alias gch='g checkout'
 # alias gspp="gsta && gup && gstp"
 # alias gspp="gsta -u && gup && (gstp || true) && ga . && g reset ."
+# alias gpsup='git push -u origin $(gb)'
+alias gb='echo "${$(git symbolic-ref --quiet HEAD 2> /dev/null)#refs/heads/}"'
 alias g.="go mod tidy && go run ."
 alias gt="go test"
 alias wh='which'
@@ -191,6 +194,13 @@ export PATH=/usr/local/Cellar/python@3.11/3.11.6/bin:$PATH
 # 可能由于设置了国内镜像 `pip install`需要关掉代理 否则速度很慢
 alias pi='proxy_off && pip install'
 
+# pyvenv
+# alias not working in other bash func calls
+# alias pyvenv_wetea='source ~/we-tea/tea/.venv/bin/activate'
+pyvenv_wetea() {
+  source ~/we-tea/tea/.venv/bin/activate
+}
+
 # bin
 export PATH="$PATH:$FRITXBASH_PATH/bin"
 
@@ -263,6 +273,20 @@ alias ydl='youtube-dl'
 # export PYTHONPATH="$PYTHONPATH:$HOME/g/yt-dlp"
 alias ydp="yt-dlp --user-agent '$YDL_UA' $YDL_DES"
 # alias ydl='ydp'
+# you-get
+# https://github.com/soimort/you-get
+# export PYTHONPATH="$PYTHONPATH:$HOME/we-digest/you-get"
+# alias you-get='python -m you-get -f mp4 -o "$HOME/Downloads/%(title)s_%(id)s.%(ext)s"'
+export PATH="$PATH:$HOME/we-digest/you-get"
+yget() {
+  set -e
+  cd "$HOME/we-digest/you-get"
+  source .venv/bin/activate
+  you-get -i -o ~/Downloads/ "$1"
+}
+
+# browser-use
+# export PYTHONPATH="$PYTHONPATH:$HOME/we-ai/browser-use"
 
 # bun is not supported in old MacOS
 # Run: npm i -g nuekit@0.3.2 (pnpm i -g not working either)
@@ -281,6 +305,25 @@ alias google-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chr
 # google-chrome --version
 # google-chrome --headless=new --remote-debugging-port=9222
 # google-chrome --user-data-dir=/tmp/bench_chrome --headless=new --dump-dom https://fritx.me"
+
+# zig
+# export PATH="$PATH:$HOME/zig-macos-x86_64-0.14.0-dev.3445+6c3cbb0c8"
+export PATH="$PATH:$HOME/zig-macos-x86_64-0.13.0"
+
+# getnf
+# https://raw.githubusercontent.com/getnf/getnf/main/install.sh
+# https://www.nerdfonts.com/font-downloads
+export PATH="$HOME/.local/bin:$PATH"
+
+# LibreOffice/soiffce
+alias soffice='/Applications/LibreOffice.app/Contents/MacOS/soffice'
+
+# aider
+# aider --model deepseek --deepseek
+export AIDER_GITIGNORE=False
+
+# prepend /usr/local/bin for brew install latest bash
+export PATH="/usr/local/bin:$PATH"
 
 # personal private stuffs (-post)
 . ~/.bashrc_private_post

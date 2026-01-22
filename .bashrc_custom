@@ -1,5 +1,48 @@
 #!/usr/bin/env bash
 
+load_shelltool() {
+  for f in 'dotenv.sh'; do
+    fp="$HOME/we-mid/bec-analysis/shelltool/$f"
+    [ -e "$fp" ] && echo "Loading $fp" && . "$fp"
+  done
+  unset f
+}
+
+dockertags() {
+  local repo=$1
+  case "$repo" in
+    */*) repo="$repo" ;;
+    *)   repo="library/$repo" ;;
+  esac
+  curl -s "https://hub.docker.com/v2/repositories/$repo/tags/?page_size=100" | \
+    jq -r '["Tag", "Size(MB)", "Created"],
+           (.results[] | [.name, (.full_size/1048576|floor|tostring)+"MB", .last_updated[0:10]])
+           | @tsv' | column -t
+}
+# dockertags nginx
+# dockertags grafana/grafana
+
+# sre
+# list disk space taken by sub dirs
+# depth defaults to 0
+# usage: `dud ~/.pm2/logs`, `dud 2 ~/we-mid/*/*`
+is_number() {
+  case $1 in
+    ''|*[!0-9]*) return 1 ;; # 如果为空，或者包含非数字字符，返回 false (1)
+    *) return 0 ;;            # 否则，全是数字，返回 true (0)
+  esac
+}
+dud() {
+  if is_number "$1"; then
+    local depth="$1"; shift
+  else
+    local depth=0
+  fi
+  local dirs=("$@")  # support args like'dir/*'
+  [ ${#dirs[@]} -eq 0 ] && dirs=(.)
+  (set -x; du -h -d "$depth" "${dirs[@]}")
+}
+
 # github raw mirror
 gitrawdown() {
     if [ $# -lt 2 ]; then
@@ -29,8 +72,10 @@ ocr() {
 
 # background raining
 # See also: crx/itsraining
+# RainyMood: https://rainymood.com
+# Mind the Terms of Use: https://rainymood.com/about.php
 raining() {
-  mpv --loop=1 ~/Downloads/下雨声RainyMood.mp3
+  mpv --loop=1 ~/Documents/rainymood.com.m4a
 }
 
 # ollama
@@ -66,23 +111,20 @@ function sip() {
   fi
 }
 function ipp() {
+  # if [[ -z $1 ]]; then
     if [ $# -lt 1 ]; then
         echo "缺少参数"
         return 1
     fi
-    grep -C 10 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
-    grep -C 10 $1 ~/we-mid/bec-infra/svc_apis/ip2r_patch.txt
-}
-function sre() {
-    # if [[ -z $1 ]]; then
-    if [ $# -lt 1 ]; then
-        echo "缺少参数"
-        return 1
-    fi
-    grep -C 10 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
-    grep -C 10 $1 ~/we-mid/bec-infra/svc_apis/ip2r_patch.txt
     echo "---"
-    grep -C 10 $1 ~/we-mid/bec-analysis/regionmap/src/data/map.js
+    grep -C 5 $1 ~/we-mid/bec-infra/x/ip2r/patch_config.go
+    echo "---"
+    grep -C 5 $1 ~/we-mid/bec-infra/svc_apis/ip2r_patch.txt
+    echo "---"
+    grep -C 5 $1 ~/we-mid/bec-analysis/regionmap/src/data/map.js
+    echo "---"
+    grep -C 5 $1 ~/we-mid/bec-apps/bec-table-server/api_coo/match.go
+    echo "---"
 }
 function geo() {
     if [ $# -lt 1 ]; then
@@ -112,6 +154,23 @@ function hgrep() {
     }' $2
 }
 
+# Mac (requires sudo)
+# https://blog.fritx.me/?weekly/220922
+psbyport() {
+  echo 'lsof:'
+  out="$(sudo lsof -i -P -n | grep "$1")"
+  echo "$out"
+  pid=$(echo "$out" | awk '{ print $2 }')
+  echo
+  echo "pid: $pid"
+  echo
+  echo 'ps:'
+  ps -ef | grep $pid | grep -v ' grep '
+}
+pss() {
+  ps -ef | grep "$1" | grep -v ' grep '
+}
+
 # random password
 function rndpwd() {
     local n=$1
@@ -123,6 +182,17 @@ function rndpwd() {
 }
 
 # git
+# function gspp() {
+#     not_clean=$(if [ -n "$(git status --porcelain)" ]; then echo true; else echo false; fi)
+#     dt=$(date '+%Y-%m-%d_%H:%M:%S')
+#     if [ $not_clean = true ] ; then
+#         git stash push -u -m "$dt"
+#     fi
+#     git pull --rebase
+#     if [ $not_clean = true ] ; then
+#         git stash pop
+#     fi
+# }
 function gspp() {
     local customfn="$1"
     # fix ls behavior when gspp called in other scripts
@@ -189,7 +259,9 @@ function npm_reg() {
 
 # short for imagemin
 function imgmin() {
+  ll -h $1
   imagemin $1 --out-dir .
+  ll -h $1
 }
 
 # prepend text to file
@@ -219,9 +291,9 @@ function proxydisable() {
   networksetup -setsocksfirewallproxystate "Wi-Fi" off
 }
 function proxyon() {
-  networksetup -getwebproxy "Wi-Fi" | grep -q 'Enabled: Yes' || echo '[warn] proxy is not enabled now. Run `proxyenable` first'
-  export https_proxy=http://127.0.0.1:8118 http_proxy=http://127.0.0.1:8118 all_proxy=socks5://127.0.0.1:8119
-  export HTTPS_PROXY=http://127.0.0.1:8118 HTTP_PROXY=http://127.0.0.1:8118 ALL_PROXY=socks5://127.0.0.1:8119
+  networksetup -getwebproxy "Wi-Fi" | grep -q 'Enabled: Yes' || echo '[warn] proxy set but not enabled now. Start your proxy first or run `proxyenable`'
+  export https_proxy=$MY_HTTP_PROXY http_proxy=$MY_HTTP_PROXY all_proxy=$MY_SOCKS_PROXY
+  export HTTPS_PROXY=$MY_HTTP_PROXY HTTP_PROXY=$MY_HTTP_PROXY ALL_PROXY=$MY_SOCKS_PROXY
   # Proxies and VPNs | minikube
   # https://minikube.sigs.k8s.io/docs/handbook/vpn_and_proxy/
   export NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24
@@ -229,4 +301,10 @@ function proxyon() {
 function proxyoff() {
   unset https_proxy http_proxy all_proxy
   unset HTTPS_PROXY HTTP_PROXY ALL_PROXY
+}
+function proxyget() {
+  echo "HTTPS_PROXY: $HTTPS_PROXY"
+  echo "HTTP_PROXY: $HTTP_PROXY"
+  echo "ALL_PROXY: $ALL_PROXY"
+  echo "NO_PROXY: $NO_PROXY"
 }
